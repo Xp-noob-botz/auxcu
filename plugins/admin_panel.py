@@ -15,30 +15,30 @@ ADMIN_USER_ID = Config.ADMIN
 # Flag to indicate if the bot is restarting
 is_restarting = False
     # Function to get system specs
-    def get_system_specs():
-        # Get RAM usage
-        ram = psutil.virtual_memory()
-        ram_total = ram.total // (1024**3)  # Total RAM in GB
-        ram_used = ram.used // (1024**3)  # Used RAM in GB
+    # def get_system_specs():
+    #     # Get RAM usage
+    #     ram = psutil.virtual_memory()
+    #     ram_total = ram.total // (1024**3)  # Total RAM in GB
+    #     ram_used = ram.used // (1024**3)  # Used RAM in GB
 
-        # Get ROM (Disk) usage
-        disk = psutil.disk_usage('/')
-        rom_total = disk.total // (1024**3)  # Total ROM in GB
-        rom_used = disk.used // (1024**3)  # Used ROM in GB
+    #     # Get ROM (Disk) usage
+    #     disk = psutil.disk_usage('/')
+    #     rom_total = disk.total // (1024**3)  # Total ROM in GB
+    #     rom_used = disk.used // (1024**3)  # Used ROM in GB
 
-        # Get CPU usage
-        cpu_usage = psutil.cpu_percent(interval=1)
+    #     # Get CPU usage
+    #     cpu_usage = psutil.cpu_percent(interval=1)
 
-        return ram_total, ram_used, rom_total, rom_used, cpu_usage
+    #     return ram_total, ram_used, rom_total, rom_used, cpu_usage
 
-    # Command to display system specs
-    @Client.on_message()
-    async def show_system_specs(client, message):
-        if message.text.lower() == '/specs':
-            ram_total, ram_used, rom_total, rom_used, cpu_usage = get_system_specs()
-            await message.reply_text(f"RAM: {ram_used}GB / {ram_total}GB\n"
-                                     f"ROM: {rom_used}GB / {rom_total}GB\n"
-                                     f"CPU Usage: {cpu_usage}%")
+    # # Command to display system specs
+    # @Client.on_message()
+    # async def show_system_specs(client, message):
+    #     if message.text.lower() == '/specs':
+    #         ram_total, ram_used, rom_total, rom_used, cpu_usage = get_system_specs()
+    #         await message.reply_text(f"RAM: {ram_used}GB / {ram_total}GB\n"
+    #                                  f"ROM: {rom_used}GB / {rom_total}GB\n"
+    #                                  f"CPU Usage: {cpu_usage}%")
 		
 @Client.on_message(filters.private & filters.command("specs") & filters.user(ADMIN_USER_ID))
 async def restart_bot(b, m):
