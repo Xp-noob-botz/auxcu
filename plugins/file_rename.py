@@ -12,7 +12,7 @@ import os
 import time
 import re
 
-LOG_CHANNEL = "-1002112731266"
+
 
 renaming_operations = {}
 
@@ -208,7 +208,7 @@ async def auto_rename_files(client, message):
 
         download_msg = await message.reply_text(text="Trying To Download.....")
         try:
-            await message.copy(chat_id=LOG_CHANNEL)
+            await message.copy(chat_id=Config.FLOG_CHANNAL)
             path = await client.download_media(message=file, file_name=file_path, progress=progress_for_pyrogram, progress_args=("Download Started....", download_msg, time.time()))
         except Exception as e:
             # Mark the file as ignored
