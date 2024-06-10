@@ -75,21 +75,23 @@ Use These Keywords To Setup Custom File Name
 ⦿ /see_caption - Use This Command To See Your Caption
 ⦿ /del_caption - Use This Command To Delete Your Caption"""
 
-    PROGRESS_BAR = """<b>\n
+PROGRESS_BAR = """<b>\n
 ╭━━━━❰ᴘʀᴏɢʀᴇss ʙᴀʀ❱━➣
 ┣⪼ 🗃️ Sɪᴢᴇ: {1} | {2}
 ┣⪼ ⏳️ Dᴏɴᴇ : {0}%
 ┣⪼ 🚀 Sᴩᴇᴇᴅ: {3}/s
 ┣⪼ ⏰️ Eᴛᴀ: {4}
 ┣⪼ 🥺 joine Plz: @PandaWep
-╰━━━━━━━━━━━━━━━➣ </b>"""
+╰━━━━━━━━━━━━━━━➣ 
+||<a href=https://t.me/botzpwchat>❏ If Speed Are not Fast Then Our Minimum Speed - 6MbPs 🚀 | 12MbPs 🚀 Then Plz Report Send on @botzpwchat</a>||
+</b>"""
 
 
     DONATE_TXT = """<b>🥲 Thanks For Showing Interest In Donation! ❤️</b>
 
 If You Like My Bots & Projects, You Can 🎁 Donate Me Any Amount From 10 Rs Upto Your Choice.
 
-<b>My UPI - PandaWep@ybl</b> """
+<b>My UPI - `PandaWep@ybl`</b> """
 
     HELP_TXT = """<b>Hey</b> {}
 
