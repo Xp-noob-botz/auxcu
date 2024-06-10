@@ -91,7 +91,7 @@ PROGRESS_BAR = """<b>\n
 
 If You Like My Bots & Projects, You Can 🎁 Donate Me Any Amount From 10 Rs Upto Your Choice.
 
-<b>My UPI - `PandaWep@ybl`</b> """
+<b>My UPI - `PandaWep@ybl`</b>"""
 
     HELP_TXT = """<b>Hey</b> {}
 
