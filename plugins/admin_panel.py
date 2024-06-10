@@ -11,6 +11,14 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 ADMIN_USER_ID = Config.ADMIN
 
+@Client.on_message(filters.private & filters.command(["ping", "p"]))
+async def ping(_, message):
+    start_t = time.time()
+    rm = await message.reply_text("Pinging....")
+    end_t = time.time()
+    time_taken_s = (end_t - start_t) * 1000
+    await rm.edit(f"Ping 🔥!\n||{time_taken_s:.3f}|| ms")
+    return time_taken_s
 
 # Flag to indicate if the bot is restarting
 is_restarting = False
