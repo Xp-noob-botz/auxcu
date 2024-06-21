@@ -5,11 +5,13 @@ class Config(object):
     # pyro client config
     API_ID    = os.environ.get("API_ID", "29917436")
     API_HASH  = os.environ.get("API_HASH", "4a926822b076a086a167fe8f2701d3e9")
-    BOT_TOKEN = os.environ.get("BOT_TOKEN", "6936293249:AAFEqrXmE-hqaM7Yo-O33fd0rnHt_C6vi5M")
+    BOT_TOKEN = os.environ.get("BOT_TOKEN", "6936293249:AAFvRbk5JjERXqkVT3QXbjtE7FihwrzqYf0")
 
     # database config
     DB_NAME = os.environ.get("DB_NAME","AshutoshGoswami24")
     DB_URL  = os.environ.get("DB_URL","mongodb+srv://autoranembot:47lRvGstRz0DmA4w@cluster0.r7wan0y.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+    API  = os.environ.get("API","")
+    PORT  = os.environ.get("PORT","")
 
     # other configs
     BOT_UPTIME  = time.time()
@@ -105,4 +107,3 @@ Joine @PandaWep To Help """
 # Don't Remove Credit 🥺
 # Telegram Channel @PandaWep
 # Developer @AshutoshGoswami24
-
