@@ -4,7 +4,6 @@ from pyrogram import Client, __version__
 from pyrogram.raw.all import layer
 from config import Config
 from aiohttp import web
-from route import web_server
 import requests
 import asyncio
 
@@ -20,28 +19,30 @@ class Bot(Client):
             plugins={"root": "plugins"},
             sleep_threshold=15,
         )
+        self.start_time = None
 
     async def start(self):
         await super().start()
         me = await self.get_me()
         self.mention = me.mention
         self.username = me.username  
-        self.uptime = Config.BOT_UPTIME     
+        self.uptime = Config.BOT_UPTIME
+        self.start_time = datetime.now()  # Record the bot's start time
         if Config.WEBHOOK:
             app = web.AppRunner(await web_server())
-            await app.setup()       
-            await web.TCPSite(app, "0.0.0.0", Config.PORT).start()     
+            await app.setup()
+            await web.TCPSite(app, "0.0.0.0", Config.PORT).start()
         print(f"{me.first_name} Is Started.....✨️")
         for id in Config.ADMIN:
             try:
-                await self.send_message(Config.REDEPLOY, f"**{me.first_name} Is Started.....✨️**")                                
+                await self.send_message(Config.REDEPLOY, f"**{me.first_name} Is Started.....✨️**")
             except Exception as e:
                 print(f"Error sending start message: {str(e)}")
         if Config.LOG_CHANNEL:
             try:
                 await self.send_redeploy_message(me)
 
-                # Schedule redeployment after 90 minutes
+                # Schedule redeployment after initial run time + 90 minutes
                 await self.schedule_redeploy()
 
             except Exception as e:
@@ -59,28 +60,39 @@ class Bot(Client):
             print(f"Error sending redeploy message: {str(e)}")
 
     async def schedule_redeploy(self):
-        while True:
-            try:
-                # Sleep for 90 minutes
-                await asyncio.sleep(5400)
+        try:
+            # Calculate the time when redeployment should occur
+            redeploy_time = self.start_time + timedelta(minutes=90)
+            current_time = datetime.now()
+            
+            # Calculate initial delay if bot is started after its redeploy time
+            initial_delay = max(redeploy_time - current_time, timedelta())
+            
+            # Wait initial delay before redeploying
+            await asyncio.sleep(initial_delay.total_seconds())
 
+            while True:
                 # Redeploy the app
                 await self.redeploy_app()
 
-            except Exception as e:
-                print(f"Error in redeployment schedule: {str(e)}")
+                # Wait for 90 minutes before redeploying again
+                await asyncio.sleep(90 * 60)
+
+        except Exception as e:
+            print(f"Error in redeployment schedule: {str(e)}")
 
     async def redeploy_app(self):
         try:
+            me = await self.get_me()  # Fetch me again to get the updated object
             print("Redeploying the app...")
-            await self.send_message(Config.REDEPLOY, f"**{me.mention} Is Redeploying !!`</b>")
+            await self.send_message(Config.REDEPLOY, f"**{me.mention} Is Redeploying !!**")
             response = requests.post(Config.REDEPLOY_URL)
             if response.status_code == 200:
                 print("App redeployed successfully!")
-                await self.send_message(Config.REDEPLOY, f"**{me.mention} Is Redeploying successfully!!!`</b>")
+                await self.send_message(Config.REDEPLOY, f"**{me.mention} Is Redeploying successfully!!!**")
             else:
                 print(f"Failed to redeploy app. Status code: {response.status_code}")
-                await self.send_message(Config.REDEPLOY, f"**{me.mention} Is Redeploying Failed!!!`</b>")
+                await self.send_message(Config.REDEPLOY, f"**{me.mention} Is Redeploying Failed!!!**")
 
         except Exception as e:
             print(f"Error redeploying app: {str(e)}")
