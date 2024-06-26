@@ -6,6 +6,7 @@ from config import Config
 from aiohttp import web
 import requests
 import asyncio
+from route import web_server  # Ensure web_server is imported correctly
 
 class Bot(Client):
 
@@ -25,24 +26,21 @@ class Bot(Client):
         await super().start()
         me = await self.get_me()
         self.mention = me.mention
-        self.username = me.username  
+        self.username = me.username
         self.uptime = Config.BOT_UPTIME
-        self.start_time = datetime.now()  # Record the bot's start time
         if Config.WEBHOOK:
             app = web.AppRunner(await web_server())
             await app.setup()
             await web.TCPSite(app, "0.0.0.0", Config.PORT).start()
         print(f"{me.first_name} Is Started.....✨️")
-        for id in Config.ADMIN:
-            try:
-                await self.send_message(Config.REDEPLOY, f"**{me.first_name} Is Started.....✨️**")
-            except Exception as e:
-                print(f"Error sending start message: {str(e)}")
+        print(f"ʀᴀᴘᴏ https://github.com/AshutoshGoswami24/Rename-Bot")
+        print(f"ʀᴀᴘᴏ ᴄʀᴇᴀᴛᴏʀ https://github.com/AshutoshGoswami24")
+        
         if Config.LOG_CHANNEL:
             try:
                 await self.send_redeploy_message(me)
 
-                # Schedule redeployment after initial run time + 90 minutes
+                # Schedule redeployment after initial runtime + 90 minutes
                 await self.schedule_redeploy()
 
             except Exception as e:
@@ -55,20 +53,21 @@ class Bot(Client):
             date = curr.strftime('%d %B, %Y')
             time = curr.strftime('%I:%M:%S %p')
             await self.send_message(Config.REDEPLOY, f"**{me.mention} Is Restarted !!**\n\n📅 Date : `{date}`\n⏰ Time : `{time}`\n🌐 Timezone : `Asia/Kolkata`\n\n🉐 Version : `v{__version__} (Layer {layer})`</b>")
-            await self.send_message(Config.FLOG_CHANNEL, f"{me.mention}-{time}")
+            await self.send_message(Config.SET_TXT, f"**{me.mention} Is Restarted !!**\n\n📅 Date : `{date}`\n⏰ Time : `{time}`\n🌐 Timezone : `Asia/Kolkata`\n\n🉐 Version : `v{__version__} (Layer {layer})`</b>")
+            
         except Exception as e:
             print(f"Error sending redeploy message: {str(e)}")
 
     async def schedule_redeploy(self):
         try:
-            # Calculate the time when redeployment should occur
+            # Calculate redeployment time as start_time + 90 minutes
             redeploy_time = self.start_time + timedelta(minutes=90)
             current_time = datetime.now()
-            
+
             # Calculate initial delay if bot is started after its redeploy time
             initial_delay = max(redeploy_time - current_time, timedelta())
-            
-            # Wait initial delay before redeploying
+
+            # Wait initial delay before redeploying for the first time
             await asyncio.sleep(initial_delay.total_seconds())
 
             while True:
@@ -83,8 +82,8 @@ class Bot(Client):
 
     async def redeploy_app(self):
         try:
-            me = await self.get_me()  # Fetch me again to get the updated object
             print("Redeploying the app...")
+            me = await self.get_me()  # Fetch me again to get the updated object
             await self.send_message(Config.REDEPLOY, f"**{me.mention} Is Redeploying !!**")
             response = requests.post(Config.REDEPLOY_URL)
             if response.status_code == 200:
@@ -99,6 +98,7 @@ class Bot(Client):
 
 # Instantiate and run the Bot
 Bot().run()
+
 
 # ʀᴀᴘᴏ ᴄʀᴇᴀᴛᴏʀ https://github.com/AshutoshGoswami24
 # ʀᴀᴘᴏ https://github.com/AshutoshGoswami24/Rename-Bot
