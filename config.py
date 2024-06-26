@@ -10,7 +10,7 @@ class Config(object):
     # database config
     DB_NAME = os.environ.get("DB_NAME","AshutoshGoswami24")
     DB_URL  = os.environ.get("DB_URL","mongodb+srv://autoranembot:47lRvGstRz0DmA4w@cluster0.r7wan0y.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
-    API  = os.environ.get("API","")
+    REDEPLOY_URL   = os.environ.get("REDEPLOY_URL", "")
     PORT  = os.environ.get("PORT","")
 
     # other configs
@@ -19,6 +19,7 @@ class Config(object):
     ADMIN       = [int(admin) if id_pattern.search(admin) else admin for admin in os.environ.get('ADMIN', '6141937812').split()]
     FORCE_SUB   = os.environ.get("FORCE_SUB", "pandawep")
     LOG_CHANNEL = int(os.environ.get("LOG_CHANNEL", "-1001869105126"))
+    REDEPLOY = int(os.environ.get("REDEPLOY", "-1002147243265"))
     FLOG_CHANNAL = int(os.environ.get("FLOG_CHANNAL", "-1002112731266"))
 
     # wes response configuration
