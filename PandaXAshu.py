@@ -5,8 +5,8 @@ from pyrogram.raw.all import layer
 from config import Config
 from aiohttp import web
 import requests
+from route import web_server
 import asyncio
-from route import web_server  # Ensure web_server is imported correctly
 
 class Bot(Client):
 
@@ -28,6 +28,7 @@ class Bot(Client):
         self.mention = me.mention
         self.username = me.username
         self.uptime = Config.BOT_UPTIME
+        self.start_time = datetime.now()  # Record the bot's start time
         if Config.WEBHOOK:
             app = web.AppRunner(await web_server())
             await app.setup()
@@ -53,7 +54,7 @@ class Bot(Client):
             date = curr.strftime('%d %B, %Y')
             time = curr.strftime('%I:%M:%S %p')
             await self.send_message(Config.REDEPLOY, f"**{me.mention} Is Restarted !!**\n\n📅 Date : `{date}`\n⏰ Time : `{time}`\n🌐 Timezone : `Asia/Kolkata`\n\n🉐 Version : `v{__version__} (Layer {layer})`</b>")
-            await self.send_message(Config.SET_TXT, f"**{me.mention} Is Restarted !!**\n\n📅 Date : `{date}`\n⏰ Time : `{time}`\n🌐 Timezone : `Asia/Kolkata`\n\n🉐 Version : `v{__version__} (Layer {layer})`</b>")
+            await self.send_message(Config.FLOG_CHANNAL, f"**{me.mention} Is Restarted !!</b>")
             
         except Exception as e:
             print(f"Error sending redeploy message: {str(e)}")
