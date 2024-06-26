@@ -34,7 +34,7 @@ class Bot(Client):
         print(f"{me.first_name} Is Started.....✨️")
         for id in Config.ADMIN:
             try:
-                await self.send_message(Config.LOG_CHANNEL, f"**{me.first_name} Is Started.....✨️**")                                
+                await self.send_message(Config.REDEPLOY, f"**{me.first_name} Is Started.....✨️**")                                
             except Exception as e:
                 print(f"Error sending start message: {str(e)}")
         if Config.LOG_CHANNEL:
