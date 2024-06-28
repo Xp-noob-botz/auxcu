@@ -17,7 +17,7 @@ class Config(object):
     BOT_UPTIME  = time.time()
     START_PIC   = os.environ.get("START_PIC", "https://graph.org/file/b372b3773e70fb60132c0.jpg")
     ADMIN       = [int(admin) if id_pattern.search(admin) else admin for admin in os.environ.get('ADMIN', '6141937812').split()]
-    FORCE_SUB   = os.environ.get("FORCE_SUB", "pandawep")
+    FORCE_SUB   = os.environ.get("FORCE_SUB", "BotzPW")
     LOG_CHANNEL = int(os.environ.get("LOG_CHANNEL", "-1001869105126"))
     REDEPLOY = int(os.environ.get("REDEPLOY", "-1002147243265"))
     FLOG_CHANNAL = int(os.environ.get("FLOG_CHANNAL", "-1002112731266"))
