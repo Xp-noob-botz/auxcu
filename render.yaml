@@ -13,3 +13,5 @@ services:
         sync: false
       - key: REDEPLOY_URL
         sync: false
+      - key: BOT_TOKEN
+        sync: false
