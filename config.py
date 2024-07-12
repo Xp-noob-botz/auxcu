@@ -86,8 +86,8 @@ Use These Keywords To Setup Custom File Name
 ┣⪼ ⏰️ Eᴛᴀ: {4}
 ┣⪼ 🥺 joine Plz: @PandaWep
 ╰━━━━━━━━━━━━━━━➣ 
-||<a href=https://t.me/botzpwchat>❏ If Speed Are not Fast Then Our Minimum Speed - 6MbPs 🚀 | 12MbPs 🚀 Then Plz Report Send on @botzpwchat</a>||
 </b>"""
+    #||<a href=https://t.me/botzpwchat>❏ If Speed Are not Fast Then Our Minimum Speed - 6MbPs 🚀 | 12MbPs 🚀 Then Plz Report Send on @botzpwchat</a>||
 
 
     DONATE_TXT = """<b>🥲 Thanks For Showing Interest In Donation! ❤️</b>
