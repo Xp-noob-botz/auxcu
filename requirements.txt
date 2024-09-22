@@ -9,3 +9,4 @@ pytz==2023.3
 psutil
 #---ʀᴀᴘᴏ https://github.com/AshutoshGoswami24/Rename-Bot---#
 requests
+pymongo==3.12.3
